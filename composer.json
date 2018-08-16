@@ -2,6 +2,7 @@
     "name": "fabis94/php-twiddle",
     "description": "The Chase's Twiddle algorithm rewritten in PHP that returns all combinations of m out of n objects.",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Fabis94",

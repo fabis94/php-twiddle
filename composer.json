@@ -1,28 +1,31 @@
 {
-    "name": "fabis94/php-twiddle",
-    "description": "The Chase's Twiddle algorithm rewritten in PHP that returns all combinations of m out of n objects.",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Fabis94",
-            "email": "fabis94@live.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Fabis94\\Twiddle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "require": {
-        "php":"^7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6"
+  "name": "fabis94/php-twiddle",
+  "description": "The Chase's Twiddle algorithm rewritten in PHP that returns all combinations of m out of n objects.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fabis94",
+      "email": "fabis94@live.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Fabis94\\Twiddle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.4|^8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "scripts": {
+    "test": "phpunit tests/"
+  }
 }

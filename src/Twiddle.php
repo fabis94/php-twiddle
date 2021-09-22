@@ -3,6 +3,7 @@
 namespace Fabis94\Twiddle;
 
 use Fabis94\Twiddle\Internal\Exceptions\TwiddleException;
+use Generator;
 
 /**
  * Chase's Twiddle algorithm for returning all combinations of m out of n objects.
@@ -12,11 +13,11 @@ use Fabis94\Twiddle\Internal\Exceptions\TwiddleException;
 class Twiddle
 {
     /** @var int */
-    private $m;
+    private int $m;
     /** @var int */
-    private $n;
-    /** @var array */
-    private $p;
+    private int $n;
+    /** @var array<int> */
+    private array $p;
 
     /**
      * Twiddle constructor.
@@ -53,18 +54,15 @@ class Twiddle
         }
 
         $this->p[$setSize+1] = -2;
-        if ($combinationSize === 0) {
-            $this->p[1] = 1;
-        }
     }
 
     /**
      * Retrieve generator for iteratively building combinations. This way you can stop building when needed.
      * @param array $values Array of values of size 'n'
-     * @return \Generator
+     * @return Generator
      * @throws TwiddleException
      */
-    public function getCombinationGenerator(array $values)
+    public function getCombinationGenerator(array $values): Generator
     {
         if (count($values) !== $this->n) {
             throw new TwiddleException("The value array must have the same length as 'n' - " . $this->n);
@@ -95,7 +93,7 @@ class Twiddle
      * @return array Combinations
      * @throws TwiddleException
      */
-    public function getAllCombinations(array $values)
+    public function getAllCombinations(array $values): array
     {
         $results = [];
         $generator = $this->getCombinationGenerator($values);
@@ -114,7 +112,8 @@ class Twiddle
      * @param array $p
      * @return bool
      */
-    private function twiddle(int &$x, int &$y, int &$z, array &$p) {
+    private function twiddle(int &$x, int &$y, int &$z, array &$p): bool
+    {
         $j = 1;
 
         while ($p[$j] <= 0) {

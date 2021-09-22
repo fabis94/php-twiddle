@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  php7:
+    build:
+      context: ./dev-setup/docker/php
+      args:
+        PHP_VER: 7.4
+    volumes:
+      - .:/app
+  php8:
+    build:
+      context: ./dev-setup/docker/php
+      args:
+        PHP_VER: 8.0
+    volumes:
+      - .:/app

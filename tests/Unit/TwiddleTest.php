@@ -6,7 +6,7 @@ use Fabis94\Twiddle\Internal\Exceptions\TwiddleException;
 use Fabis94\Twiddle\Twiddle;
 use PHPUnit\Framework\TestCase;
 
-final class TwiddleTestCase extends TestCase
+final class TwiddleTest extends TestCase
 {
     public function testCantInstantiateWithNegativeN()
     {
@@ -67,12 +67,11 @@ final class TwiddleTestCase extends TestCase
     {
         // Set up
         $twiddle = new Twiddle(count($values), $combinationSize);
-        $sortedExpectedResult = $this->normalizeCombinationsArray($expectedResult);
 
         // Test and check results
         $generator = $twiddle->getCombinationGenerator($values);
         foreach ($generator as $combination) {
-            $this->assertContains(sort($combination), $expectedResult);
+            $this->assertContains($combination, $expectedResult);
         }
     }
 
@@ -94,7 +93,7 @@ final class TwiddleTestCase extends TestCase
         $this->assertCombinationsEqual($expectedResult1, $combinations1);
         $generator1 = $twiddle->getCombinationGenerator($values1);
         foreach ($generator1 as $combination) {
-            $this->assertContains(sort($combination), $expectedResult1);
+            $this->assertContains($combination, $expectedResult1);
         }
 
         // Test second values
@@ -102,7 +101,7 @@ final class TwiddleTestCase extends TestCase
         $this->assertCombinationsEqual($expectedResult2, $combinations2);
         $generator2 = $twiddle->getCombinationGenerator($values2);
         foreach ($generator2 as $combination) {
-            $this->assertContains(sort($combination), $expectedResult2);
+            $this->assertContains($combination, $expectedResult2);
         }
     }
 
@@ -110,7 +109,7 @@ final class TwiddleTestCase extends TestCase
      * Provides some combinations and expected results to test
      * @return array
      */
-    public function combinationProvider()
+    public function combinationProvider(): array
     {
         // $values, $combinationSize, $expectedResult
         return [
@@ -130,11 +129,9 @@ final class TwiddleTestCase extends TestCase
      * @param array $expectedResult
      * @param array $output
      */
-    protected function assertCombinationsEqual($expectedResult, $output)
+    protected function assertCombinationsEqual(array $expectedResult, array $output): void
     {
-        $expectedResult = $this->normalizeCombinationsArray($expectedResult);
-        $output = $this->normalizeCombinationsArray($output);
-        $this->assertEquals($expectedResult, $output);
+        $this->assertEqualsCanonicalizing($expectedResult, $output);
     }
 
     /**
@@ -153,7 +150,7 @@ final class TwiddleTestCase extends TestCase
         usort($array, function ($combA, $combB) {
             $keyA = implode("", $combA);
             $keyB = implode("", $combB);
-            return $keyA > $keyB;
+            return $keyA > $keyB ? 1 : -1;
         });
 
         return $array;

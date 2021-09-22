@@ -10,7 +10,7 @@ This package provides both a PHP `\Generator` and a standard method for retrievi
 
 ## Requirements
 
-PHP7+ (probably future versions as well)
+PHP7.4 & PHP8
 
 ## How to use
 
@@ -41,3 +41,11 @@ foreach ($combinationGenerator as $combination) {
     $i++;
 }
 ```
+
+## Local development
+
+Run `docker-compose up -d` to run the docker environment. You can then SSH into one of the PHP containers (one has php7.4 and the other one has php8.0) to run `composer`, `tests` etc.: `docker-compose exec php7 bash` or `docker-compose exec php8 bash`
+
+The codebase is going to be mounted onto `/app` inside the containers.
+
+Run tests inside container with `composer test`.
